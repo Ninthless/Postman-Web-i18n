@@ -38,7 +38,7 @@ _即将上线_
 1. **克隆仓库**
 
 ```bash
-git clone https://github.com/yourusername/postman-web-i18n.git
+git clone https://github.com/Ninthless/Postman-Web-i18n.git
 cd postman-web-i18n
 ```
 
@@ -207,7 +207,7 @@ npm run build
 
 ```bash
 # 克隆仓库
-git clone https://github.com/yourusername/postman-web-i18n.git
+git clone https://github.com/Ninthless/Postman-Web-i18n.git
 cd postman-web-i18n
 
 # 安装依赖

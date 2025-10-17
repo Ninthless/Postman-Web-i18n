@@ -7,7 +7,7 @@
 ### 1. 克隆项目
 
 ```bash
-git clone https://github.com/yourusername/postman-web-i18n.git
+git clone https://github.com/Ninthless/Postman-Web-i18n.git
 cd postman-web-i18n
 ```
 
