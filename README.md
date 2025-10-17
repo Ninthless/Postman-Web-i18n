@@ -1,6 +1,10 @@
-# Postman Web i18n
+# Postman Web i18n - Postman 网页版中文汉化插件
 
-> 为 Postman 网页版提供专业的国际化汉化支持
+> 为 Postman 网页版提供专业的国际化汉化支持 | Postman 中文翻译 | Postman 简体中文 | API 测试工具汉化
+
+**让 Postman Web 说中文！一键安装，自动翻译，完全开源的浏览器扩展。**
+
+关键词：Postman中文版、Postman汉化插件、Postman翻译、Postman网页版中文、Chrome扩展、Edge插件、API测试工具、开发者工具汉化
 
 <p align="center">
   <!-- 构建完成后会自动显示 -->

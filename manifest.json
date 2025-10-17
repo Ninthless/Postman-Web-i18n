@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Postman Web i18n",
-  "description": "为Postman网页版提供国际化汉化支持",
+  "name": "Postman Web i18n - Postman中文汉化",
+  "description": "Postman网页版中文汉化插件，支持简体中文翻译，让API测试更简单。自动翻译界面，完全开源免费。",
   "version": "1.0.0",
   "default_locale": "en",
   "content_scripts": [
