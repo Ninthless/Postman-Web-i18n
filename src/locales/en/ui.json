@@ -1,0 +1,73 @@
+{
+  "sidebar": {
+    "collections": "Collections",
+    "apis": "APIs",
+    "environments": "Environments",
+    "mock_servers": "Mock Servers",
+    "monitors": "Monitors",
+    "history": "History",
+    "workspaces": "Workspaces"
+  },
+  "collection": {
+    "new_collection": "New Collection",
+    "new_folder": "New Folder",
+    "new_request": "New Request",
+    "add_request": "Add Request",
+    "add_folder": "Add Folder",
+    "documentation": "Documentation",
+    "variables": "Variables",
+    "authorization": "Authorization",
+    "pre_request_scripts": "Pre-request Scripts",
+    "tests": "Tests",
+    "run_collection": "Run Collection"
+  },
+  "environment": {
+    "new_environment": "New Environment",
+    "manage_environments": "Manage Environments",
+    "no_environment": "No Environment",
+    "global": "Global",
+    "initial_value": "Initial Value",
+    "current_value": "Current Value",
+    "variable": "Variable",
+    "type": "Type"
+  },
+  "workspace": {
+    "personal": "Personal Workspace",
+    "team": "Team Workspace",
+    "public": "Public Workspace",
+    "overview": "Overview",
+    "activity": "Activity",
+    "members": "Members"
+  },
+  "buttons": {
+    "save": "Save",
+    "save_as": "Save As",
+    "cancel": "Cancel",
+    "close": "Close",
+    "send": "Send",
+    "send_and_download": "Send and Download",
+    "add": "Add",
+    "remove": "Remove",
+    "clear": "Clear",
+    "clear_all": "Clear All",
+    "import": "Import",
+    "export": "Export",
+    "share": "Share",
+    "publish": "Publish",
+    "fork": "Fork",
+    "merge": "Merge",
+    "update": "Update"
+  },
+  "placeholders": {
+    "search": "Search",
+    "enter_request_url": "Enter request URL",
+    "key": "Key",
+    "value": "Value",
+    "description": "Description",
+    "variable_name": "Variable Name",
+    "collection_name": "Collection Name",
+    "folder_name": "Folder Name",
+    "request_name": "Request Name"
+  }
+}
+

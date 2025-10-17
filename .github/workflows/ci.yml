@@ -1,0 +1,102 @@
+name: 持续集成
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x, 20.x]
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      
+      - name: 设置 Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      
+      - name: 安装依赖
+        run: npm ci
+      
+      - name: 运行 ESLint 检查
+        run: npm run lint
+        continue-on-error: true
+      
+      - name: 检查翻译文件
+        run: npm run check-translations
+        continue-on-error: true
+      
+      - name: 运行构建
+        run: npm run build
+      
+      - name: 验证构建产物
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "错误: dist 目录不存在"
+            exit 1
+          fi
+          
+          if [ ! -f "dist/manifest.json" ]; then
+            echo "错误: manifest.json 不存在"
+            exit 1
+          fi
+          
+          if [ ! -d "dist/locales" ]; then
+            echo "错误: locales 目录不存在"
+            exit 1
+          fi
+          
+          echo "构建产物验证通过"
+      
+      - name: 上传构建产物
+        uses: actions/upload-artifact@v4
+        if: matrix.node-version == '18.x'
+        with:
+          name: build-artifacts
+          path: |
+            dist/
+            postman-web-i18n.zip
+          retention-days: 7
+      
+      - name: 构建信息
+        run: |
+          echo "Node 版本: ${{ matrix.node-version }}"
+          echo "构建状态: 成功"
+          du -sh dist/
+          du -sh postman-web-i18n.zip
+
+  check-version:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      
+      - name: 检查版本号
+        run: |
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          MANIFEST_VERSION=$(node -p "require('./manifest.json').version")
+          
+          echo "package.json 版本: $PACKAGE_VERSION"
+          echo "manifest.json 版本: $MANIFEST_VERSION"
+          
+          if [ "$PACKAGE_VERSION" != "$MANIFEST_VERSION" ]; then
+            echo "警告: package.json 和 manifest.json 的版本号不一致"
+            exit 1
+          fi
+          
+          echo "版本号检查通过"
+

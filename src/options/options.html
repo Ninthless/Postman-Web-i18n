@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Postman Web i18n - 设置</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-content">
+        <h1>Postman Web i18n</h1>
+        <p class="subtitle">为Postman网页版提供专业的国际化汉化支持</p>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="general">基本设置</button>
+      <button class="tab-btn" data-tab="translation">翻译管理</button>
+      <button class="tab-btn" data-tab="custom">自定义规则</button>
+      <button class="tab-btn" data-tab="about">关于</button>
+    </nav>
+
+    <main>
+      <!-- 基本设置 -->
+      <section id="general" class="tab-content active">
+        <div class="card">
+          <h2>语言设置</h2>
+          <div class="form-group">
+            <label for="locale">界面语言</label>
+            <select id="locale" class="form-control">
+              <option value="zh-CN">简体中文</option>
+              <option value="zh-TW">繁體中文</option>
+              <option value="en">English</option>
+            </select>
+            <p class="help-text">选择你想使用的界面语言</p>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="autoTranslate" checked>
+              <span>自动翻译新页面</span>
+            </label>
+            <p class="help-text">当打开Postman页面时自动进行翻译</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>高级选项</h2>
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="translateDynamic" checked>
+              <span>翻译动态加载的内容</span>
+            </label>
+            <p class="help-text">监听并翻译页面动态添加的内容</p>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="debugMode">
+              <span>调试模式</span>
+            </label>
+            <p class="help-text">在控制台显示详细的翻译日志</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 翻译管理 -->
+      <section id="translation" class="tab-content">
+        <div class="card">
+          <h2>翻译统计</h2>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-value" id="totalTranslations">0</div>
+              <div class="stat-label">总翻译条目</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="coveragePercent">0%</div>
+              <div class="stat-label">翻译覆盖率</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="lastUpdate">-</div>
+              <div class="stat-label">最后更新</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>翻译操作</h2>
+          <div class="action-buttons">
+            <button id="exportBtn" class="btn btn-primary">导出翻译</button>
+            <button id="importBtn" class="btn btn-secondary">导入翻译</button>
+            <button id="resetBtn" class="btn btn-danger">重置翻译</button>
+          </div>
+          <input type="file" id="fileInput" accept=".json" style="display: none;">
+        </div>
+      </section>
+
+      <!-- 自定义规则 -->
+      <section id="custom" class="tab-content">
+        <div class="card">
+          <h2>自定义翻译规则</h2>
+          <p class="info-text">添加自定义的文本替换规则，适用于特殊需求</p>
+          
+          <div class="custom-rules-list" id="customRulesList">
+            <!-- 动态生成 -->
+          </div>
+
+          <button id="addRuleBtn" class="btn btn-primary">+ 添加规则</button>
+        </div>
+
+        <div class="card">
+          <h2>规则模板</h2>
+          <p class="info-text">使用JSON格式定义规则：</p>
+          <pre class="code-block">{
+  "selector": "text",
+  "match": "^原文本$",
+  "key": "translation.key"
+}</pre>
+        </div>
+      </section>
+
+      <!-- 关于 -->
+      <section id="about" class="tab-content">
+        <div class="card">
+          <h2>关于插件</h2>
+          <div class="about-content">
+            <p><strong>版本：</strong> 1.0.0</p>
+            <p><strong>作者：</strong> Your Name</p>
+            <p><strong>许可证：</strong> MIT</p>
+            <p><strong>项目主页：</strong> 
+              <a href="https://github.com/yourusername/postman-web-i18n" target="_blank">
+                GitHub
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>参与贡献</h2>
+          <p>欢迎提交翻译改进、bug报告和功能建议！</p>
+          <div class="action-buttons">
+            <button id="githubBtn" class="btn btn-primary">访问 GitHub</button>
+            <button id="issueBtn" class="btn btn-secondary">报告问题</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>更新日志</h2>
+          <div class="changelog">
+            <div class="changelog-item">
+              <div class="version">v1.0.0</div>
+              <div class="date">2024-01-01</div>
+              <ul>
+                <li>初始版本发布</li>
+                <li>支持简体中文、繁体中文翻译</li>
+                <li>实现动态内容翻译</li>
+                <li>提供自定义规则功能</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <p>© 2024 Postman Web i18n. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
+

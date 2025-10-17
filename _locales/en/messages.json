@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Postman Web i18n",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "Internationalization support for Postman Web",
+    "description": "Extension description"
+  }
+}
+

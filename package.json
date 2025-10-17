@@ -1,0 +1,32 @@
+{
+  "name": "postman-web-i18n",
+  "version": "1.0.0",
+  "description": "Postman网页版国际化汉化浏览器插件",
+  "author": "Your Name",
+  "license": "MIT",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "dev": "node scripts/build.js --watch",
+    "lint": "echo 'ESLint 检查暂未配置'",
+    "check-translations": "node scripts/checkTranslations.js",
+    "translate:check": "node scripts/checkTranslations.js",
+    "translate:export": "node scripts/exportTranslations.js",
+    "translate:import": "node scripts/importTranslations.js",
+    "icons:generate": "node scripts/generateIcons.js",
+    "release": "node scripts/release.js"
+  },
+  "devDependencies": {
+    "archiver": "^6.0.1",
+    "chokidar": "^3.5.3",
+    "fs-extra": "^11.1.1",
+    "sharp": "^0.33.0"
+  },
+  "keywords": [
+    "postman",
+    "i18n",
+    "中文",
+    "汉化",
+    "browser-extension",
+    "chrome-extension"
+  ]
+}

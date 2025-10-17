@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Postman网页版汉化",
+    "description": "插件名称"
+  },
+  "extensionDescription": {
+    "message": "为Postman网页版提供国际化汉化支持",
+    "description": "插件描述"
+  }
+}
+

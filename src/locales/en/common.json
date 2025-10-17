@@ -1,0 +1,61 @@
+{
+  "app": {
+    "name": "Postman",
+    "workspace": "Workspace",
+    "collection": "Collection",
+    "environment": "Environment",
+    "settings": "Settings"
+  },
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "send": "Send",
+    "import": "Import",
+    "export": "Export",
+    "share": "Share",
+    "duplicate": "Duplicate",
+    "rename": "Rename",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort"
+  },
+  "http": {
+    "methods": {
+      "GET": "GET",
+      "POST": "POST",
+      "PUT": "PUT",
+      "DELETE": "DELETE",
+      "PATCH": "PATCH",
+      "HEAD": "HEAD",
+      "OPTIONS": "OPTIONS"
+    },
+    "request": "Request",
+    "response": "Response",
+    "headers": "Headers",
+    "body": "Body",
+    "params": "Params",
+    "authorization": "Authorization",
+    "tests": "Tests",
+    "pre_request_script": "Pre-request Script"
+  },
+  "tabs": {
+    "params": "Params",
+    "authorization": "Authorization",
+    "headers": "Headers",
+    "body": "Body",
+    "pre_request": "Pre-request Script",
+    "tests": "Tests",
+    "settings": "Settings"
+  },
+  "status": {
+    "loading": "Loading...",
+    "saving": "Saving...",
+    "saved": "Saved",
+    "error": "Error",
+    "success": "Success"
+  }
+}
+
