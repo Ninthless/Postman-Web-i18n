@@ -3,10 +3,11 @@
 > 为 Postman 网页版提供专业的国际化汉化支持
 
 <p align="center">
-  <img src="https://img.shields.io/github/actions/workflow/status/Ninthless/Postman-Web-i18n/auto-build-release.yml?label=构建状态" alt="Build Status">
+  <!-- 构建完成后会自动显示 -->
+  <!-- <img src="https://img.shields.io/github/actions/workflow/status/Ninthless/Postman-Web-i18n/auto-build-release.yml?label=构建状态" alt="Build Status"> -->
   <img src="https://img.shields.io/github/license/Ninthless/Postman-Web-i18n" alt="License">
   <img src="https://img.shields.io/badge/browser-Chrome%20%7C%20Edge-orange.svg" alt="Browser">
-  <img src="https://img.shields.io/github/v/release/Ninthless/Postman-Web-i18n?label=最新版本" alt="Latest Release">
+  <!-- <img src="https://img.shields.io/github/v/release/Ninthless/Postman-Web-i18n?label=最新版本" alt="Latest Release"> -->
 </p>
 
 ## 特性
