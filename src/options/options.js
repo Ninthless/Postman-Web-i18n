@@ -41,10 +41,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 关于页面按钮
   document.getElementById('githubBtn')?.addEventListener('click', () => {
-    window.open('https://github.com/yourusername/postman-web-i18n', '_blank');
+    window.open('https://github.com/Ninthless/Postman-Web-i18n', '_blank');
   });
   document.getElementById('issueBtn')?.addEventListener('click', () => {
-    window.open('https://github.com/yourusername/postman-web-i18n/issues', '_blank');
+    window.open('https://github.com/Ninthless/Postman-Web-i18n/issues', '_blank');
   });
 
   // 加载统计数据

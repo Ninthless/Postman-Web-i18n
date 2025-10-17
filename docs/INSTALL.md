@@ -21,7 +21,7 @@ _即将上线_
 
 ### 方式二：从发布版本安装
 
-1. 访问 [Releases 页面](https://github.com/yourusername/postman-web-i18n/releases)
+1. 访问 [Releases 页面](https://github.com/Ninthless/Postman-Web-i18n/releases)
 2. 下载最新版本的 `.zip` 文件
 3. 解压到本地目录
 4. 在浏览器中加载（见下文"手动加载插件"）
@@ -243,7 +243,7 @@ npm run dev
 如果遇到问题：
 
 1. 查看 [常见问题](../README.md#常见问题)
-2. 搜索 [Issues](https://github.com/yourusername/postman-web-i18n/issues)
+2. 搜索 [Issues](https://github.com/Ninthless/Postman-Web-i18n/issues)
 3. 创建新的 Issue 寻求帮助
 
 ---

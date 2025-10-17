@@ -54,6 +54,6 @@
 
 ## 链接
 
-- [未发布]: https://github.com/yourusername/postman-web-i18n/compare/v1.0.0...HEAD
-- [1.0.0]: https://github.com/yourusername/postman-web-i18n/releases/tag/v1.0.0
+- [未发布]: https://github.com/Ninthless/Postman-Web-i18n/compare/v1.0.0...HEAD
+- [1.0.0]: https://github.com/Ninthless/Postman-Web-i18n/releases/tag/v1.0.0
 

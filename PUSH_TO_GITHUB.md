@@ -105,10 +105,10 @@ git push -u origin main
 ### 2. 查看结果
 
 **查看构建状态：**
-- 访问：`https://github.com/yourusername/postman-web-i18n/actions`
+- 访问：`https://github.com/Ninthless/Postman-Web-i18n/actions`
 
 **查看发布：**
-- 访问：`https://github.com/yourusername/postman-web-i18n/releases`
+- 访问：`https://github.com/Ninthless/Postman-Web-i18n/releases`
 
 **下载安装包：**
 - 在 Releases 页面下载 `postman-web-i18n-*.zip`

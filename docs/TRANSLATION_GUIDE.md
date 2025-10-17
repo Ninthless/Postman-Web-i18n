@@ -394,8 +394,8 @@ console.log(pattern.test(text)); // 应该为 true
 
 ## 资源
 
-- [项目主页](https://github.com/yourusername/postman-web-i18n)
-- [问题反馈](https://github.com/yourusername/postman-web-i18n/issues)
+- [项目主页](https://github.com/Ninthless/Postman-Web-i18n)
+- [问题反馈](https://github.com/Ninthless/Postman-Web-i18n/issues)
 - [Postman 官方文档](https://learning.postman.com/)
 
 ## 获取帮助

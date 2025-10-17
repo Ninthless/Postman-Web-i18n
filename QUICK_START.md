@@ -175,7 +175,7 @@ npm run build
 
 ### 需要帮助
 - 查看 [完整文档](README.md)
-- 搜索 [Issues](https://github.com/yourusername/postman-web-i18n/issues)
+- 搜索 [Issues](https://github.com/Ninthless/Postman-Web-i18n/issues)
 - 提交新的 Issue
 
 ## 下一步

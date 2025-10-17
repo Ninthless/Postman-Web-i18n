@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   feedbackLink.addEventListener('click', (e) => {
     e.preventDefault();
     chrome.tabs.create({
-      url: 'https://github.com/yourusername/postman-web-i18n/issues'
+      url: 'https://github.com/Ninthless/Postman-Web-i18n/issues'
     });
   });
 

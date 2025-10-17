@@ -3,10 +3,10 @@
 > 为 Postman 网页版提供专业的国际化汉化支持
 
 <p align="center">
-  <img src="https://img.shields.io/github/workflow/status/yourusername/postman-web-i18n/自动构建发布?label=构建状态" alt="Build Status">
-  <img src="https://img.shields.io/github/license/yourusername/postman-web-i18n" alt="License">
+  <img src="https://img.shields.io/github/actions/workflow/status/Ninthless/Postman-Web-i18n/auto-build-release.yml?label=构建状态" alt="Build Status">
+  <img src="https://img.shields.io/github/license/Ninthless/Postman-Web-i18n" alt="License">
   <img src="https://img.shields.io/badge/browser-Chrome%20%7C%20Edge-orange.svg" alt="Browser">
-  <img src="https://img.shields.io/github/v/release/yourusername/postman-web-i18n?label=最新版本" alt="Latest Release">
+  <img src="https://img.shields.io/github/v/release/Ninthless/Postman-Web-i18n?label=最新版本" alt="Latest Release">
 </p>
 
 ## 特性
@@ -68,7 +68,7 @@ npm run build
    - 重新翻译页面
    - 访问高级设置
 
-## 📁 项目结构
+## 项目结构
 
 ```
 postman-web-i18n/
@@ -244,8 +244,8 @@ window.postmanI18n.retranslate();
 
 ## 联系方式
 
-- 项目主页: [https://github.com/yourusername/postman-web-i18n](https://github.com/yourusername/postman-web-i18n)
-- 问题反馈: [Issues](https://github.com/yourusername/postman-web-i18n/issues)
+- 项目主页: [https://github.com/Ninthless/Postman-Web-i18n](https://github.com/Ninthless/Postman-Web-i18n)
+- 问题反馈: [Issues](https://github.com/Ninthless/Postman-Web-i18n/issues)
 
 ## 路线图
 

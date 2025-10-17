@@ -228,5 +228,5 @@ window.postmanI18n.retranslate();
 
 - 查看 [README](../README.md)
 - 查看 [常见问题](FAQ.md)
-- 提交 [Issue](https://github.com/yourusername/postman-web-i18n/issues)
+- 提交 [Issue](https://github.com/Ninthless/Postman-Web-i18n/issues)
 

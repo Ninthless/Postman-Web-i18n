@@ -178,7 +178,7 @@ on:
 在 README.md 中添加构建状态徽章：
 
 ```markdown
-![自动构建](https://github.com/yourusername/postman-web-i18n/workflows/自动构建发布/badge.svg)
+![自动构建](https://github.com/Ninthless/Postman-Web-i18n/workflows/自动构建发布/badge.svg)
 ```
 
 ## 建议

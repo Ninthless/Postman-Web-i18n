@@ -244,7 +244,7 @@ A: 确保 MutationObserver 正在运行，检查控制台是否有错误
 如果您需要帮助：
 
 - 查看 [文档](README.md)
-- 搜索现有的 [Issues](https://github.com/yourusername/postman-web-i18n/issues)
+- 搜索现有的 [Issues](https://github.com/Ninthless/Postman-Web-i18n/issues)
 - 创建新的 Issue 提问
 
 ## 致谢
