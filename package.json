@@ -12,8 +12,7 @@
     "translate:check": "node scripts/checkTranslations.js",
     "translate:export": "node scripts/exportTranslations.js",
     "translate:import": "node scripts/importTranslations.js",
-    "icons:generate": "node scripts/generateIcons.js",
-    "release": "node scripts/release.js"
+    "icons:generate": "node scripts/generateIcons.js"
   },
   "devDependencies": {
     "archiver": "^6.0.1",

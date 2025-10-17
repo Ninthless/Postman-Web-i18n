@@ -3,9 +3,10 @@
 > 为 Postman 网页版提供专业的国际化汉化支持
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.0-blue.svg" alt="Version">
-  <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License">
+  <img src="https://img.shields.io/github/workflow/status/yourusername/postman-web-i18n/自动构建发布?label=构建状态" alt="Build Status">
+  <img src="https://img.shields.io/github/license/yourusername/postman-web-i18n" alt="License">
   <img src="https://img.shields.io/badge/browser-Chrome%20%7C%20Edge-orange.svg" alt="Browser">
+  <img src="https://img.shields.io/github/v/release/yourusername/postman-web-i18n?label=最新版本" alt="Latest Release">
 </p>
 
 ## 特性
@@ -16,6 +17,7 @@
 - **易于维护** - 模块化的翻译文件结构，便于更新和贡献
 - **美观界面** - 现代化的 UI 设计，提供良好的用户体验
 - **热更新** - 无需刷新页面即可切换语言
+- **自动发布** - 推送代码自动构建和发布，简化工作流程
 
 ## 截图
 
