@@ -1,7 +1,7 @@
 {
   "name": "postman-web-i18n",
   "version": "1.0.0",
-  "description": "Postman网页版国际化汉化浏览器插件",
+  "description": "为 Postman 网页版提供专业的国际化汉化支持",
   "author": "Your Name",
   "license": "MIT",
   "scripts": {
