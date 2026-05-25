@@ -494,23 +494,30 @@ class PageTranslator {
    */
   translateTextNode(node) {
     const originalText = node.textContent.trim();
-    
+
     if (!originalText) return;
 
-    // 尝试匹配翻译规则
+    const parentTag = node.parentElement ? node.parentElement.tagName.toLowerCase() : '';
+    const isButtonContext = parentTag === 'button' ||
+      (node.parentElement && node.parentElement.getAttribute('role') === 'button');
+
     for (const rule of this.translationRules) {
-      if (rule.selector === 'text') {
-        const matches = originalText.match(rule.match);
-        if (matches) {
-          const translatedText = rule.dynamic 
-            ? this.getTranslation(rule.key, matches)
-            : this.i18n.t(rule.key);
-          
-          if (translatedText && translatedText !== rule.key) {
-            node.textContent = node.textContent.replace(originalText, translatedText);
-            this.translatedElements.add(node.parentElement);
-            break;
-          }
+      const selectorMatches =
+        rule.selector === 'text' ||
+        (rule.selector === 'button' && isButtonContext);
+
+      if (!selectorMatches) continue;
+
+      const matches = originalText.match(rule.match);
+      if (matches) {
+        const translatedText = rule.dynamic
+          ? this.getTranslation(rule.key, matches)
+          : this.i18n.t(rule.key);
+
+        if (translatedText && translatedText !== rule.key) {
+          node.textContent = translatedText;
+          this.translatedElements.add(node.parentElement);
+          break;
         }
       }
     }

@@ -260,13 +260,28 @@ function loadCustomRules() {
 /**
  * 添加自定义规则
  */
+function validateRule(rule) {
+  const VALID_SELECTORS = new Set(['text', 'button', 'placeholder', 'aria-label', 'label', 'title']);
+  if (typeof rule !== 'object' || rule === null || Array.isArray(rule)) return false;
+  if (!VALID_SELECTORS.has(rule.selector)) return false;
+  if (typeof rule.key !== 'string' || !rule.key.trim()) return false;
+  if (typeof rule.match !== 'string' || !rule.match.trim()) return false;
+  try { new RegExp(rule.match); } catch { return false; }
+  return true;
+}
+
 function addCustomRule() {
   const ruleJson = prompt('请输入规则JSON：');
   if (!ruleJson) return;
 
   try {
     const rule = JSON.parse(ruleJson);
-    
+
+    if (!validateRule(rule)) {
+      showToast('规则格式无效，请检查 selector/key/match 字段', 'error');
+      return;
+    }
+
     chrome.storage.sync.get(['customRules'], (result) => {
       const rules = result.customRules || [];
       rules.push(rule);
@@ -294,8 +309,15 @@ function editRule(index) {
     if (!ruleJson) return;
 
     try {
-      rules[index] = JSON.parse(ruleJson);
-      
+      const updated = JSON.parse(ruleJson);
+
+      if (!validateRule(updated)) {
+        showToast('规则格式无效，请检查 selector/key/match 字段', 'error');
+        return;
+      }
+
+      rules[index] = updated;
+
       chrome.storage.sync.set({ customRules: rules }, () => {
         showToast('规则已更新', 'success');
         loadCustomRules();
