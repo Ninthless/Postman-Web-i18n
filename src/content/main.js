@@ -56,6 +56,14 @@
 
     console.log('[Postman i18n] 插件已启动');
     console.log('[Postman i18n] 使用 window.postmanI18n 访问API');
+
+    chrome.runtime.onMessage.addListener((request) => {
+      if (request.type === 'TRANSLATIONS_IMPORTED' && request.data) {
+        window.i18n.mergeTranslations(request.data);
+        translator.translatedElements = new WeakSet();
+        translator.translatePage();
+      }
+    });
   } else {
     console.error('[Postman i18n] i18n加载器未找到');
   }
