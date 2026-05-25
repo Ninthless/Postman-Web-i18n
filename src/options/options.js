@@ -111,7 +111,8 @@ async function loadStats() {
     
     document.getElementById('totalTranslations').textContent = totalCount;
     document.getElementById('coveragePercent').textContent = '100%';
-    document.getElementById('lastUpdate').textContent = '2024-01-01';
+    const manifest = chrome.runtime.getManifest();
+    document.getElementById('lastUpdate').textContent = `v${manifest.version}`;
   } catch (error) {
     console.error('加载统计数据失败:', error);
   }

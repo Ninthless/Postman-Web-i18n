@@ -35,7 +35,7 @@ class I18nLoader {
    * 检测浏览器语言
    */
   detectBrowserLocale() {
-    const lang = navigator.language || navigator.userLanguage;
+    const lang = navigator.language;
     
     // 语言映射
     const localeMap = {

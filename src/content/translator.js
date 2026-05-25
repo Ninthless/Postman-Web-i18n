@@ -410,7 +410,7 @@ class PageTranslator {
     // 如果有匹配的动态参数，替换它们
     if (matches && matches.length > 1) {
       for (let i = 1; i < matches.length; i++) {
-        text = text.replace(`{${i-1}}`, matches[i]);
+        text = text.replace(new RegExp(`\\{${i - 1}\\}`, 'g'), matches[i]);
       }
     }
     
@@ -600,9 +600,16 @@ class PageTranslator {
       for (const rule of this.translationRules) {
         if (rule.selector === 'label' && rule.match.test(labelText)) {
           const translatedText = this.i18n.t(rule.key);
-          
+
           if (translatedText && translatedText !== rule.key) {
-            element.textContent = translatedText;
+            const textNode = Array.from(element.childNodes).find(
+              (n) => n.nodeType === Node.TEXT_NODE && n.textContent.trim()
+            );
+            if (textNode) {
+              textNode.textContent = translatedText;
+            } else {
+              element.insertBefore(document.createTextNode(translatedText), element.firstChild);
+            }
             element.setAttribute('data-i18n-label', rule.key);
             this.translatedElements.add(element);
             break;
