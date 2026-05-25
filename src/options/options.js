@@ -39,7 +39,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   // 自定义规则
   document.getElementById('addRuleBtn')?.addEventListener('click', addCustomRule);
 
-  // 关于页面按钮
+  document.getElementById('customRulesList')?.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    const index = parseInt(btn.dataset.index, 10);
+    if (btn.dataset.action === 'edit') editRule(index);
+    if (btn.dataset.action === 'delete') deleteRule(index);
+  });
+
   document.getElementById('githubBtn')?.addEventListener('click', () => {
     window.open('https://github.com/Ninthless/Postman-Web-i18n', '_blank');
   });
@@ -79,8 +86,8 @@ function saveSettings() {
   const settings = {
     locale: document.getElementById('locale').value,
     autoTranslate: document.getElementById('autoTranslate').checked,
-    translateDynamic: document.getElementById('translateDynamic')?.checked || true,
-    debugMode: document.getElementById('debugMode')?.checked || false
+    translateDynamic: document.getElementById('translateDynamic')?.checked ?? true,
+    debugMode: document.getElementById('debugMode')?.checked ?? false
   };
 
   chrome.storage.sync.set(settings, () => {
@@ -104,7 +111,8 @@ async function loadStats() {
     
     document.getElementById('totalTranslations').textContent = totalCount;
     document.getElementById('coveragePercent').textContent = '100%';
-    document.getElementById('lastUpdate').textContent = '2024-01-01';
+    const manifest = chrome.runtime.getManifest();
+    document.getElementById('lastUpdate').textContent = `v${manifest.version}`;
   } catch (error) {
     console.error('加载统计数据失败:', error);
   }
@@ -166,8 +174,19 @@ function importTranslations(event) {
   reader.onload = (e) => {
     try {
       const data = JSON.parse(e.target.result);
-      // 这里可以实现导入逻辑
-      showToast('翻译已导入', 'success');
+      if (typeof data !== 'object' || data === null || Array.isArray(data)) {
+        showToast('导入失败，文件格式不正确', 'error');
+        return;
+      }
+      chrome.storage.local.set({ importedTranslations: data }, () => {
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+          const tab = tabs[0];
+          if (tab && tab.url && (tab.url.includes('postman.com') || tab.url.includes('postman.co'))) {
+            chrome.tabs.sendMessage(tab.id, { type: 'TRANSLATIONS_IMPORTED', data });
+          }
+        });
+        showToast('翻译已导入', 'success');
+      });
     } catch (error) {
       showToast('导入失败，请检查文件格式', 'error');
       console.error(error);
@@ -206,28 +225,64 @@ function loadCustomRules() {
       return;
     }
 
-    container.innerHTML = rules.map((rule, index) => `
-      <div class="rule-item">
-        <div class="rule-content">${JSON.stringify(rule)}</div>
-        <div class="rule-actions">
-          <button class="btn btn-secondary btn-sm" onclick="editRule(${index})">编辑</button>
-          <button class="btn btn-danger btn-sm" onclick="deleteRule(${index})">删除</button>
-        </div>
-      </div>
-    `).join('');
+    container.innerHTML = '';
+    rules.forEach((rule, index) => {
+      const item = document.createElement('div');
+      item.className = 'rule-item';
+
+      const content = document.createElement('div');
+      content.className = 'rule-content';
+      content.textContent = JSON.stringify(rule);
+
+      const actions = document.createElement('div');
+      actions.className = 'rule-actions';
+
+      const editBtn = document.createElement('button');
+      editBtn.className = 'btn btn-secondary btn-sm';
+      editBtn.textContent = '编辑';
+      editBtn.dataset.index = index;
+      editBtn.dataset.action = 'edit';
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'btn btn-danger btn-sm';
+      deleteBtn.textContent = '删除';
+      deleteBtn.dataset.index = index;
+      deleteBtn.dataset.action = 'delete';
+
+      actions.appendChild(editBtn);
+      actions.appendChild(deleteBtn);
+      item.appendChild(content);
+      item.appendChild(actions);
+      container.appendChild(item);
+    });
   });
 }
 
 /**
  * 添加自定义规则
  */
+function validateRule(rule) {
+  const VALID_SELECTORS = new Set(['text', 'button', 'placeholder', 'aria-label', 'label', 'title']);
+  if (typeof rule !== 'object' || rule === null || Array.isArray(rule)) return false;
+  if (!VALID_SELECTORS.has(rule.selector)) return false;
+  if (typeof rule.key !== 'string' || !rule.key.trim()) return false;
+  if (typeof rule.match !== 'string' || !rule.match.trim()) return false;
+  try { new RegExp(rule.match); } catch { return false; }
+  return true;
+}
+
 function addCustomRule() {
   const ruleJson = prompt('请输入规则JSON：');
   if (!ruleJson) return;
 
   try {
     const rule = JSON.parse(ruleJson);
-    
+
+    if (!validateRule(rule)) {
+      showToast('规则格式无效，请检查 selector/key/match 字段', 'error');
+      return;
+    }
+
     chrome.storage.sync.get(['customRules'], (result) => {
       const rules = result.customRules || [];
       rules.push(rule);
@@ -246,7 +301,7 @@ function addCustomRule() {
 /**
  * 编辑规则
  */
-window.editRule = function(index) {
+function editRule(index) {
   chrome.storage.sync.get(['customRules'], (result) => {
     const rules = result.customRules || [];
     const rule = rules[index];
@@ -255,8 +310,15 @@ window.editRule = function(index) {
     if (!ruleJson) return;
 
     try {
-      rules[index] = JSON.parse(ruleJson);
-      
+      const updated = JSON.parse(ruleJson);
+
+      if (!validateRule(updated)) {
+        showToast('规则格式无效，请检查 selector/key/match 字段', 'error');
+        return;
+      }
+
+      rules[index] = updated;
+
       chrome.storage.sync.set({ customRules: rules }, () => {
         showToast('规则已更新', 'success');
         loadCustomRules();
@@ -266,12 +328,9 @@ window.editRule = function(index) {
       console.error(error);
     }
   });
-};
+}
 
-/**
- * 删除规则
- */
-window.deleteRule = function(index) {
+function deleteRule(index) {
   if (!confirm('确定要删除此规则吗？')) return;
 
   chrome.storage.sync.get(['customRules'], (result) => {
@@ -283,11 +342,8 @@ window.deleteRule = function(index) {
       loadCustomRules();
     });
   });
-};
+}
 
-/**
- * 显示提示
- */
 function showToast(message, type = 'success') {
   const toast = document.createElement('div');
   toast.className = `toast ${type}`;

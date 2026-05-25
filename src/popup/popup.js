@@ -88,7 +88,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.body.appendChild(notification);
 
     setTimeout(() => {
-      notification.style.animation = 'slideUp 0.3s ease-out';
+      notification.style.animation = 'none';
+      notification.offsetHeight;
+      notification.style.animation = 'slideUp 0.3s ease-out forwards';
       setTimeout(() => {
         notification.remove();
       }, 300);

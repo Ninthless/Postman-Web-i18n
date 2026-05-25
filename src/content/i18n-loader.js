@@ -35,7 +35,7 @@ class I18nLoader {
    * 检测浏览器语言
    */
   detectBrowserLocale() {
-    const lang = navigator.language || navigator.userLanguage;
+    const lang = navigator.language;
     
     // 语言映射
     const localeMap = {
@@ -66,21 +66,29 @@ class I18nLoader {
    * 设置当前语言
    */
   async setLocale(locale) {
+    const previousLocale = this.currentLocale;
+    const previousTranslations = this.translations;
+    const previousModules = new Set(this.loadedModules);
+
     this.currentLocale = locale;
-    
-    // 保存到存储
     chrome.storage.sync.set({ locale });
 
-    // 重新加载所有已加载的模块
-    const modules = Array.from(this.loadedModules);
+    const modules = Array.from(previousModules);
     this.translations = {};
     this.loadedModules.clear();
 
-    for (const module of modules) {
-      await this.loadModule(module);
+    try {
+      for (const module of modules) {
+        await this.loadModule(module);
+      }
+    } catch (error) {
+      this.currentLocale = previousLocale;
+      this.translations = previousTranslations;
+      this.loadedModules = previousModules;
+      console.warn('[Postman i18n] 语言切换失败，已回滚:', error);
+      return;
     }
 
-    // 触发语言变更事件
     window.dispatchEvent(new CustomEvent('i18n:locale-changed', {
       detail: { locale }
     }));

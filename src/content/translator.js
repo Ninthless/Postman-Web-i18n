@@ -410,7 +410,7 @@ class PageTranslator {
     // 如果有匹配的动态参数，替换它们
     if (matches && matches.length > 1) {
       for (let i = 1; i < matches.length; i++) {
-        text = text.replace(`{${i-1}}`, matches[i]);
+        text = text.replace(new RegExp(`\\{${i - 1}\\}`, 'g'), matches[i]);
       }
     }
     
@@ -494,23 +494,30 @@ class PageTranslator {
    */
   translateTextNode(node) {
     const originalText = node.textContent.trim();
-    
+
     if (!originalText) return;
 
-    // 尝试匹配翻译规则
+    const parentTag = node.parentElement ? node.parentElement.tagName.toLowerCase() : '';
+    const isButtonContext = parentTag === 'button' ||
+      (node.parentElement && node.parentElement.getAttribute('role') === 'button');
+
     for (const rule of this.translationRules) {
-      if (rule.selector === 'text') {
-        const matches = originalText.match(rule.match);
-        if (matches) {
-          const translatedText = rule.dynamic 
-            ? this.getTranslation(rule.key, matches)
-            : this.i18n.t(rule.key);
-          
-          if (translatedText && translatedText !== rule.key) {
-            node.textContent = node.textContent.replace(originalText, translatedText);
-            this.translatedElements.add(node.parentElement);
-            break;
-          }
+      const selectorMatches =
+        rule.selector === 'text' ||
+        (rule.selector === 'button' && isButtonContext);
+
+      if (!selectorMatches) continue;
+
+      const matches = originalText.match(rule.match);
+      if (matches) {
+        const translatedText = rule.dynamic
+          ? this.getTranslation(rule.key, matches)
+          : this.i18n.t(rule.key);
+
+        if (translatedText && translatedText !== rule.key) {
+          node.textContent = translatedText;
+          this.translatedElements.add(node.parentElement);
+          break;
         }
       }
     }
@@ -593,9 +600,16 @@ class PageTranslator {
       for (const rule of this.translationRules) {
         if (rule.selector === 'label' && rule.match.test(labelText)) {
           const translatedText = this.i18n.t(rule.key);
-          
+
           if (translatedText && translatedText !== rule.key) {
-            element.textContent = translatedText;
+            const textNode = Array.from(element.childNodes).find(
+              (n) => n.nodeType === Node.TEXT_NODE && n.textContent.trim()
+            );
+            if (textNode) {
+              textNode.textContent = translatedText;
+            } else {
+              element.insertBefore(document.createTextNode(translatedText), element.firstChild);
+            }
             element.setAttribute('data-i18n-label', rule.key);
             this.translatedElements.add(element);
             break;

@@ -82,8 +82,8 @@ async function checkTranslations() {
     if (duplicates.length > 0) {
       hasIssues = true;
       console.log(`  发现 ${duplicates.length} 组重复值:`);
-      duplicates.slice(0, 5).forEach(({ value, keys }) => {
-        console.log(`     值: "${value}"`);
+      duplicates.slice(0, 5).forEach(({ lang, value, keys }) => {
+        console.log(`     语言: ${lang}, 值: "${value}"`);
         console.log(`     键: ${keys.join(', ')}`);
       });
     } else {
@@ -159,20 +159,19 @@ function countKeys(obj) {
  * 查找重复的值
  */
 function findDuplicateValues(translations) {
-  const valueMap = new Map();
-  
-  for (const lang in translations) {
-    collectValues(translations[lang], '', valueMap);
-  }
-  
   const duplicates = [];
-  
-  for (const [value, keys] of valueMap.entries()) {
-    if (keys.length > 1 && value.length > 3) {
-      duplicates.push({ value, keys });
+
+  for (const lang in translations) {
+    const valueMap = new Map();
+    collectValues(translations[lang], '', valueMap);
+
+    for (const [value, keys] of valueMap.entries()) {
+      if (keys.length > 1 && value.length > 3) {
+        duplicates.push({ lang, value, keys });
+      }
     }
   }
-  
+
   return duplicates;
 }
 
